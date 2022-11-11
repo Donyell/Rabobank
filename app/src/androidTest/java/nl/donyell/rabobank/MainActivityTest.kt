@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.MutableStateFlow
 import nl.donyell.domain.model.Issue
 import nl.donyell.presentation.MainUiState
 import nl.donyell.presentation.MainViewModel
@@ -36,7 +36,7 @@ class MainActivityTest {
         // Given
         val mockViewModel = mockk<MainViewModel>()
 
-        every { mockViewModel.uiState } returns flowOf(
+        every { mockViewModel.uiState } returns MutableStateFlow(
             MainUiState(emptyList(), false)
         )
 
@@ -58,7 +58,7 @@ class MainActivityTest {
         // Given
         val mockViewModel = mockk<MainViewModel>()
 
-        every { mockViewModel.uiState } returns flowOf(
+        every { mockViewModel.uiState } returns MutableStateFlow(
             MainUiState(emptyList(), true)
         )
 
@@ -105,7 +105,7 @@ class MainActivityTest {
         val issueUiModel = issues.map { it.toIssueUiModel() }
 
         val mockViewModel = mockk<MainViewModel>()
-        every { mockViewModel.uiState } returns flowOf(
+        every { mockViewModel.uiState } returns MutableStateFlow(
             MainUiState(issueUiModel, true)
         )
 
