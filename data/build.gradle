@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id "de.mannodermaus.android-junit5" version "1.8.2.1"
+}
+
+android {
+    namespace 'nl.donyell.data'
+    compileSdk compile_sdk_version
+
+    defaultConfig {
+        minSdk min_sdk_version
+        targetSdk target_sdk_version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    // Project modules
+    implementation project(':domain')
+
+    // Android
+    implementation "androidx.core:core-ktx:$kotlin_core_version"
+
+    // Hilt dependency injection
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // Retrofit
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // OkHttp
+    api(platform("com.squareup.okhttp3:okhttp-bom:$ok_http_version"))
+    api("com.squareup.okhttp3:okhttp")
+    api("com.squareup.okhttp3:logging-interceptor")
+
+    // JUnit 5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$j_unit_5_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$j_unit_5_version"
+
+    // Mockk
+    testImplementation "io.mockk:mockk:$mockk_version"
+
+    // Coroutines test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+
+    // Truth - test assertions
+    testImplementation "com.google.truth:truth:$truth_version"
+
+    // Mock web server
+    testImplementation("com.squareup.okhttp3:mockwebserver:$ok_http_version")
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
+}

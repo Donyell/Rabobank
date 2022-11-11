@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rabobank</string>
+
+    <string name="issue_count">Number of issues: %1$s</string>
+</resources>

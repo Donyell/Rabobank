@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    // Dependency injection
+    implementation 'javax.inject:javax.inject:1'
+
+    // JUnit 5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$j_unit_5_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$j_unit_5_version"
+
+    // Mockk
+    testImplementation "io.mockk:mockk:$mockk_version"
+
+    // Truth - test assertions
+    testImplementation "com.google.truth:truth:$truth_version"
+
+    // Coroutines test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+}
+
+test {
+    useJUnitPlatform()
+}
